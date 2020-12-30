@@ -1,30 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {Component} from 'react';
 
-const App = () => {
-  const profiles = [
-    {name: "Taro", age: 10},
-    {name: "Hanako", age: 5},
-    {name: "NoName", age: 3}
-  ]
-  return (
-    <div>
-      {
-        profiles.map((profile, index) => {
-          return <User name={profile.name} age={profile.age} key={index} />
-        })
-      }
-    </div>
-  )
-}
+const App = () => (<Counter></Counter>)
 
-const User = (props) => {
-  return <div>Hi, I am {props.name}, and {props.age} years old!</div>
-}
-//prop-typesでそれぞれのpropsの型を指定、isRequiredでその値が必要であることを定義している
-User.propTypes = {
-  name: PropTypes.string,
-  age: PropTypes.number.isRequired
+class Counter extends Component {
+  constructor(props) {
+    super(props)
+    console.log(this.state)
+    this.state = {count: 0}
+  }
+
+  handlePlusButton = () => {
+    //ここでやりたいのは状態を変えることと、それに関連するDOMを再描画すること
+    //setStateを実行するとrenderが実行される
+    this.setState({count: this.state.count + 1})
+  }
+
+  handleMinusButton = () =>{
+    this.setState({count: this.state.count - 1})
+  }
+
+  render () {
+    return (
+      <React.Fragment>
+        <div>count: {this.state.count}</div>
+        {/* それぞれのイベントが起こったときのアクションをメソッド化して処理している */}
+        <button onClick={this.handlePlusButton}>+1</button>
+        <button onClick={this.handleMinusButton}>-1</button>
+      </React.Fragment>
+    )
+  }
 }
 
 
