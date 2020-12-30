@@ -1,11 +1,11 @@
-import React, { useReducer } from 'react';
-import { unregister } from './registerServiceWorker';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const App = () => {
   const profiles = [
     {name: "Taro", age: 10},
     {name: "Hanako", age: 5},
-    {name: "Noname"}
+    {name: "NoName", age: 3}
   ]
   return (
     <div>
@@ -21,9 +21,11 @@ const App = () => {
 const User = (props) => {
   return <div>Hi, I am {props.name}, and {props.age} years old!</div>
 }
-
-User.defaultProps = {
-  age: 1
+//prop-typesでそれぞれのpropsの型を指定、isRequiredでその値が必要であることを定義している
+User.propTypes = {
+  name: PropTypes.string,
+  age: PropTypes.number.isRequired
 }
+
 
 export default App;
