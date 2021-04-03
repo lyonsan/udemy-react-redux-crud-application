@@ -88,6 +88,7 @@ const mapDispatchToProps = ({ deleteEvent, getEvent, putEvent })
 //mapDispatchToPropsはあるアクションが発生した時にreducerにタイプに応じた処理を実行させるための関数
 export default connect(mapStateToProps, mapDispatchToProps)(
   // enableReinitializeはinitialValuesの変更がなければフォームを更新するというもの
+  // 別クライアントがデータを変更した場合、reduxはその更新を追うことが出来ないが、enableReinitializeをtrueにしていればアクセスのたび初期化できるため、詳細ページで他の人が更新した内容を反映できる
   reduxForm({ validate, form: 'eventShowForm', enableReinitialize: true })(EventsShow)
 )
 
